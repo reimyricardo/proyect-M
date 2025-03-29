@@ -1,13 +1,16 @@
 ---
-import Layout from "../../layouts/Layout.astro"
-import { CardPlayButton } from "@/components/CardPlayButton"
-import { allPlaylists, songs } from "@/lib/data"
-import {MusicsTable} from "@/components/MusicsTable"
+import Layout from "../../layouts/Layout.astro";
+import { CardPlayButton } from "@/components/CardPlayButton";
+import { allPlaylists, songs } from "@/lib/data";
+import { MusicsTable } from "@/components/MusicsTable";
+import vercel from "@astrojs/vercel";
 
-const { id } = Astro.params
+const { id } = Astro.params;
 
-const playlist = allPlaylists.find((playlist) => playlist.id === id)
-const playListSongs = songs.filter((song) => song.albumId === playlist?.albumId)
+const playlist = allPlaylists.find((playlist) => playlist.id === id);
+const playListSongs = songs.filter(
+  (song) => song.albumId === playlist?.albumId
+);
 ---
 
 <Layout title="Spotify Clone">
@@ -15,7 +18,7 @@ const playListSongs = songs.filter((song) => song.albumId === playlist?.albumId)
     id="playlist-container"
     class="relative flex flex-col h-full bg-zinc-900 overflow-x-hidden bg-gradient-to-t from-50% from-zinc-900 via-zinc-900/80"
     style={`background-color: ${playlist?.color.accent}`}
-    transition:name=`playlist ${id} box`
+    transition:name={`playlist-${id}-box`}
   >
     <!-- <PageHeader /> -->
 
@@ -25,7 +28,7 @@ const playListSongs = songs.filter((song) => song.albumId === playlist?.albumId)
           src={playlist?.cover}
           alt={`Cover of ${playlist?.title}`}
           class="object-cover w-full h-full shadow-lg"
-          transition:name=`playlist ${playlist?.id} image`
+          transition:name={`playlist-${playlist?.id}-image`}
         />
       </picture>
 
@@ -33,15 +36,15 @@ const playListSongs = songs.filter((song) => song.albumId === playlist?.albumId)
         <h2 class="flex flex-1 items-end">Playlist</h2>
         <div>
           <h1 class="text-5xl font-bold block text-white">
-            <span transition:name=`playlist ${playlist?.id} title`>
-                {playlist?.title}
+            <span transition:name={`playlist-${playlist?.id}-title`}>
+              {playlist?.title}
             </span>
           </h1>
         </div>
 
         <div class="flex-1 flex items-end">
           <div class="text-sm text-gray-300 font-normal">
-            <div transition:name=`playlist ${playlist?.id} artists`>
+            <div transition:name={`playlist-${playlist?.id}-artists`}>
               <span>{playlist?.artists.join(", ")}</span>
             </div>
             <p class="mt-1">
@@ -60,7 +63,7 @@ const playListSongs = songs.filter((song) => song.albumId === playlist?.albumId)
     <div class="relative z-10 px-6 pt-10"></div>
 
     <section class="p-6">
-      <MusicsTable songs={playListSongs} client:load/>
+      <MusicsTable songs={playListSongs} client:load />
     </section>
   </div>
 </Layout>

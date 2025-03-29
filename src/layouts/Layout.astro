@@ -1,13 +1,14 @@
 ---
-import { Player } from "@/components/Player"
-import AsideMenu from "../components/AsideMenu.astro"
-import { ViewTransitions } from "astro:transitions"
+import { Player } from "@/components/Player";
+import AsideMenu from "../components/AsideMenu.astro";
+import { ViewTransitions } from "astro:transitions";
+import vercel from "@astrojs/vercel";
 
 interface Props {
-  title: string
+  title: string;
 }
 
-const { title } = Astro.props
+const { title } = Astro.props;
 ---
 
 <!doctype html>
