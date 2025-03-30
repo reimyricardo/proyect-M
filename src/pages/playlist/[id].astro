@@ -6,7 +6,6 @@ import { MusicsTable } from "@/components/MusicsTable";
 import vercel from "@astrojs/vercel";
 
 const { id } = Astro.params;
-
 const playlist = allPlaylists.find((playlist) => playlist.id === id);
 const playListSongs = songs.filter(
   (song) => song.albumId === playlist?.albumId
